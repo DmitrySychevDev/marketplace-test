@@ -12,7 +12,7 @@ const Header: FC = () => {
       <div className="flex justify-between items-center gap-4">
         <div>
           <Image
-            className="2xl:w-20 2xl:h-20 lg:w-12 lg:h-12"
+            className="2xl:w-18 2xl:h-18 lg:w-12 lg:h-12"
             src={logo}
             alt="logo"
           />
@@ -23,7 +23,7 @@ const Header: FC = () => {
       </div>
       <div className="flex items-center gap-12">
         <div className="relative">
-          <Image src={basket} alt="basket" className="w-12 h-14" />
+          <Image src={basket} alt="basket" className="w-11 h-13" />
           <div className="p-2 w-10  top-[-10px] right-[-35px] h-10 bg-red-600 text-white rounded-[50%] text-center absolute">
             99+
           </div>
