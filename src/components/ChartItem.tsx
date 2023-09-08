@@ -1,5 +1,7 @@
 import { FC, ReactNode } from "react";
 
+import { Cart } from "@/types/Cart";
+
 const ChartItem: FC<ChartItemProps> = ({ id, title, price, actions }) => {
   return (
     <div className="px-14 py-9 bg-gray-200 flex justify-between">
@@ -15,10 +17,7 @@ const ChartItem: FC<ChartItemProps> = ({ id, title, price, actions }) => {
   );
 };
 
-interface ChartItemProps {
-  id: number;
-  title: string;
-  price: number;
+interface ChartItemProps extends Cart {
   actions?: ReactNode;
 }
 
