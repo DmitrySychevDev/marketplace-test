@@ -1,10 +1,7 @@
-import { useState, useEffect } from "react";
-
-import Image from "next/image";
-
 import request from "@/utils/request";
 
 import ChartItem from "@/components/ChartItem";
+import BasketButton from "@/components/BasketButton";
 
 import { Cart } from "@/types/Cart";
 
@@ -22,7 +19,11 @@ const getCarts = async (): Promise<Cart[]> => {
   // TODO: Если успею реализовать пагинацию
   const allCarts: Cart[] = cartsData.carts
     .map<Cart[]>((cartItem) => cartItem.products as Cart[])
-    .reduce((prev, curr) => [...prev, ...curr]);
+    .reduce((prev, curr) => {
+      const addedCarts = prev.map((item) => item.id);
+      const uniqueCarts = curr.filter((item) => !addedCarts.includes(item.id));
+      return [...prev, ...uniqueCarts] as Cart[];
+    });
 
   return allCarts;
 };
@@ -32,13 +33,18 @@ async function Page() {
   return (
     <div className="mt-16 flex-col flex gap-16 drop-shadow-xl">
       {carts &&
-        carts.map((chart) => {
+        carts.map((cart) => {
           return (
             <ChartItem
-              key={chart.id}
-              id={chart.id}
-              title={chart.title}
-              price={chart.price}
+              key={cart.id}
+              id={cart.id}
+              title={cart.title}
+              price={cart.price}
+              actions={
+                <BasketButton
+                  cart={{ id: cart.id, title: cart.title, price: cart.price }}
+                />
+              }
             />
           );
         })}

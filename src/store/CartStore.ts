@@ -19,42 +19,48 @@ export const useCartStore = create<CartStore>((set) => ({
   cartQuantity: {},
   addCart: (cart: Cart) =>
     set((state) => {
-      const existrindCard = state.carts.find((cartsItem) => {
-        cartsItem.id === cart.id;
+      const existindCardIndex = state.carts.findIndex((cartsItem) => {
+        return cartsItem.id === cart.id;
       });
-      if (existrindCard) {
-        existrindCard.quantity++;
+      if (existindCardIndex !== -1) {
+        state.carts[existindCardIndex] = {
+          ...state.carts[existindCardIndex],
+          quantity: state.carts[existindCardIndex].quantity + 1,
+        };
 
         return {
           ...state,
-          carts: state.carts,
+          carts: [...state.carts],
           total: state.total + 1,
         };
       } else {
         const cartData: CartData = { ...cart, quantity: 1 };
         return {
           ...state,
-          carts: { ...state.carts, cartData },
+          carts: [...state.carts, cartData],
           total: state.total + 1,
         };
       }
     }),
   removeCart: (cartId: number) =>
     set((state) => {
-      const existrindCard = state.carts.find((cartsItem) => {
-        cartId === cartsItem.id;
+      const existindCardIndex = state.carts.findIndex((cartsItem) => {
+        return cartId === cartsItem.id;
       });
-      if (!existrindCard) {
+      if (existindCardIndex !== -1) {
         return { ...state };
       }
-      if (existrindCard.quantity === 1) {
+      if (state.carts[existindCardIndex].quantity === 1) {
         return {
           ...state,
-          carts: state.carts.filter((cart) => cart.id !== cartId),
+          carts: [...state.carts.filter((cart) => cart.id !== cartId)],
           total: state.total - 1,
         };
       }
-      existrindCard.quantity--;
+      state.carts[existindCardIndex] = {
+        ...state.carts[existindCardIndex],
+        quantity: state.carts[existindCardIndex].quantity + 1,
+      };
       return { ...state, total: state.total - 1 };
     }),
 }));
