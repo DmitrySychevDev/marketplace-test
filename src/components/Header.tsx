@@ -1,5 +1,11 @@
+"use client";
+
 import { FC } from "react";
 import Image from "next/image";
+
+import { useCartStore } from "@/store/CartStore";
+
+import HeaderQuantityMark from "./ChartQuantityMark";
 
 import logo from "@/assets/logo.png";
 import basket from "@/assets/basket.png";
@@ -7,6 +13,8 @@ import coinLogo from "@/assets/coin.svg";
 import avatar from "@/assets/avatar.png";
 
 const Header: FC = () => {
+  const cartsCount = useCartStore((state) => state.total);
+
   return (
     <header className="flex justify-between align-middle 2xl:px-14 2xl:py-6 lg:px-8 lg:py-5 shadow-md">
       <div className="flex justify-between items-center gap-4">
@@ -21,12 +29,13 @@ const Header: FC = () => {
           Online shop
         </h1>
       </div>
-      <div className="flex items-center gap-12">
+      <div className="flex items-center gap-14">
         <div className="relative">
           <Image src={basket} alt="basket" className="w-11 h-13" />
-          <div className="p-2 w-10  top-[-10px] right-[-35px] h-10 bg-red-600 text-white rounded-[50%] text-center absolute">
-            99+
-          </div>
+          <HeaderQuantityMark
+            quontity={cartsCount}
+            className="absolute top-[-10px] right-[-35px]"
+          />
         </div>
         <div className="flex items-center gap-5">
           <div className="text-sm">
