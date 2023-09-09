@@ -16,7 +16,7 @@ const Header: FC = () => {
   const cartsCount = useCartStore((state) => state.total);
 
   return (
-    <header className="flex justify-between align-middle 2xl:px-14 2xl:py-6 lg:px-8 lg:py-5 shadow-md">
+    <header className="flex justify-between align-middle 2xl:px-14 2xl:py-6 lg:px-8 lg:py-5 shadow-md fixed z-10 bg-white w-[100vw] top-0 right-0">
       <div className="flex justify-between items-center gap-4">
         <div>
           <Image
@@ -31,7 +31,11 @@ const Header: FC = () => {
       </div>
       <div className="flex items-center gap-14">
         <div className="relative">
-          <Image src={basket} alt="basket" className="w-11 h-13" />
+          <Image
+            src={basket}
+            alt="basket"
+            className="w-11 h-13 2xl:w-11 2xl:h-13 lg:w-9 lg:h-10"
+          />
           <HeaderQuantityMark
             quontity={cartsCount}
             className="absolute top-[-10px] right-[-35px]"
@@ -47,7 +51,7 @@ const Header: FC = () => {
               </div>
             </div>
           </div>
-          <div className="w-14 h-14">
+          <div className="2xl:w-14 2xl:h-14 lg:w-12 lg:h-12">
             <Image src={avatar} alt="avatar" />
           </div>
         </div>
