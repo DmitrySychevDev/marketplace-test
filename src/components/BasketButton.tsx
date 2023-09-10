@@ -20,9 +20,7 @@ const BasketButton: FC<{ cart: Cart }> = ({ cart }) => {
     <div className="relative">
       <button
         onClick={() => {
-          if (!cartItem) {
-            addCart(cart);
-          }
+          addCart(cart);
         }}
         title="Добавить в корзину"
       >

@@ -31,7 +31,7 @@ const getCarts = async (): Promise<Cart[]> => {
 async function Page() {
   const carts = await getCarts();
   return (
-    <div className="mt-28 flex-col flex 2xl:gap-16 xl:gap-12 lg:gap-10 drop-shadow-xl">
+    <div className="mt-28 2xl:mt-32 flex-col flex 2xl:gap-16 xl:gap-12 lg:gap-10 drop-shadow-xl">
       {carts &&
         carts.map((cart) => {
           return (

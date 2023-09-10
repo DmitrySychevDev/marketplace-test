@@ -1,8 +1,7 @@
 import { create } from "zustand";
 import { Cart } from "@/types/Cart";
 
-// При каждом изменении CartStore делать мапу [id]:quantity
-interface CartData extends Cart {
+export interface CartData extends Cart {
   quantity: number;
 }
 
@@ -47,7 +46,7 @@ export const useCartStore = create<CartStore>((set) => ({
       const existindCardIndex = state.carts.findIndex((cartsItem) => {
         return cartId === cartsItem.id;
       });
-      if (existindCardIndex !== -1) {
+      if (existindCardIndex === -1) {
         return { ...state };
       }
       if (state.carts[existindCardIndex].quantity === 1) {
@@ -59,7 +58,7 @@ export const useCartStore = create<CartStore>((set) => ({
       }
       state.carts[existindCardIndex] = {
         ...state.carts[existindCardIndex],
-        quantity: state.carts[existindCardIndex].quantity + 1,
+        quantity: state.carts[existindCardIndex].quantity - 1,
       };
       return { ...state, total: state.total - 1 };
     }),
